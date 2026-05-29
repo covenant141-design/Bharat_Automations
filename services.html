@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Bharat Automations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light slate */
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+        .clean-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+        }
+
+        /* SVG Blueprint Animations - No Glow */
+        .path-draw {
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+        }
+        
+        .draw-active {
+            animation: drawPath 4s cubic-bezier(0.4, 0, 0.2, 1) forwards infinite alternate;
+        }
+
+        @keyframes drawPath {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Technical Blueprint Dots */
+        .moving-dot {
+            offset-path: path(var(--path-data));
+            animation: moveDot 6s linear infinite;
+        }
+
+        @keyframes moveDot {
+            0% { offset-distance: 0%; }
+            100% { offset-distance: 100%; }
+        }
+
+        /* Clean Background Grid */
+        .bg-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-200 selection:text-blue-900 bg-pattern">
+
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 px-6 md:px-12 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="80" height="80" rx="16" fill="#0f172a"/>
+                    <path d="M30 70 L50 30 L70 70" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="50" cy="55" r="8" fill="#2563eb" />
+                </svg>
+                
+                <a href="home.html" class="flex items-center gap-3 cursor-pointer">
+                   <!-- Your SVG Logo here -->
+                <span class="text-xl font-bold tracking-tight text-slate-900">Bharat Automations</span>
+              </a>
+                
+               
+            </div>
+            
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+                 <a href="home.html" class="hover:text-blue-600 transition-colors">Home</a>
+                <a href="services.html" class="hover:text-blue-600 transition-colors">Our Services</a>
+                <a href="techno.html" class="hover:text-blue-600 transition-colors">Technology</a>
+                <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
+                <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a> 
+            </div>
+                    <button id="mobile-menu-btn" class="md:hidden text-slate-600 hover:text-blue-600 focus:outline-none ml-auto">
+    <i class="fas fa-bars text-2xl"></i>
+</button>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+<div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-lg py-4 px-6 flex flex-col gap-4 text-sm font-medium text-slate-600">
+    <a href="index.html" class="hover:text-blue-600 transition-colors">Home</a>
+    <a href="services.html" class="hover:text-blue-600 transition-colors">Our Services</a>
+    <a href="techno.html" class="hover:text-blue-600 transition-colors">Technology</a>
+    <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
+    <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a>
+</div>
+    </nav>
+
+    <header class="relative pt-32 pb-16 px-6 md:px-12 flex flex-col items-center text-center overflow-hidden min-h-[40vh] justify-center border-b border-slate-200 bg-white">
+        <div class="relative z-10 max-w-4xl mx-auto hero-fade">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 text-slate-900 tracking-tight">
+                End-to-End Track Automation
+            </h1>
+            <p class="text-lg text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed">
+                We engineer, install, and calibrate enterprise-grade sensor networks and AI-video analytics for both Two-Wheeler and Four-Wheeler RTO testing facilities.
+            </p>
+        </div>
+    </header>
+
+    <section id="services" class="py-20 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <!-- Service 1: Four Wheeler -->
+            <div class="flex flex-col lg:flex-row items-center gap-16 mb-32 service-block">
+                <div class="w-full lg:w-1/2 relative h-[350px] clean-card overflow-hidden bg-slate-100 flex items-center justify-center">
+                    <div class="absolute top-4 left-4 bg-white px-3 py-1.5 text-xs font-semibold rounded shadow-sm border border-slate-200 text-slate-700 z-20">
+                        LMV Track Diagnostics
+                    </div>
+                    
+                    <!-- Real Image Placeholder -->
+                    <!-- TODO: Add your real 4W Track image URL here -->
+                    <img src="assests/images/H.png" alt="4-Wheeler Track Calibration" class="absolute inset-0 w-full h-full object-cover z-10">
+                </div>
+                
+                <div class="w-full lg:w-1/2">
+                    <h2 class="text-3xl font-bold mb-4 text-slate-900 tracking-tight">4-Wheeler Track Calibration</h2>
+                    <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                        We digitize complex maneuvers. From Gradient tests to H-Tracks and Reverse S, our calibrated mesh of IP-cameras and boundary sensors detect kerb hits and path deviations with zero latency.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                            <i class="fas fa-parking text-slate-400 mb-2 text-lg"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">Reverse Parking</h4>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                            <i class="fas fa-route text-slate-400 mb-2 text-lg"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">Reverse 'S' Track</h4>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                            <i class="fas fa-mountain text-slate-400 mb-2 text-lg"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">Gradient Test</h4>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                            <i class="fas fa-arrows-alt text-slate-400 mb-2 text-lg"></i>
+                            <h4 class="font-bold text-slate-800 text-sm">'H' Track Analytics</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2: Two Wheeler -->
+            <div class="flex flex-col lg:flex-row-reverse items-center gap-16 mb-32 service-block">
+                <div class="w-full lg:w-1/2 relative h-[350px] clean-card overflow-hidden bg-slate-100 flex items-center justify-center">
+                     <div class="absolute top-4 right-4 bg-white px-3 py-1.5 text-xs font-semibold rounded shadow-sm border border-slate-200 text-slate-700 z-20">
+                        2W Track Diagnostics
+                    </div>
+                    
+                    <!-- Real Image Placeholder -->
+                    <!-- TODO: Add your real 2W Track image URL here -->
+                    <img src="assests/images/twoW.png" alt="2-Wheeler Evaluation Systems" class="absolute inset-0 w-full h-full object-cover z-10">
+                </div>
+                
+                <div class="w-full lg:w-1/2">
+                    <h2 class="text-3xl font-bold mb-4 text-slate-900 tracking-tight">2-Wheeler Evaluation Systems</h2>
+                    <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                        Precision engineering for Serpentine and Figure-8 tracks. Specialized overhead vision systems map exact trajectories, objectively flagging foot-touches or boundary deviations.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4 bg-white border border-slate-200 p-4 rounded-lg shadow-sm">
+                            <div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-600">
+                                <i class="fas fa-shoe-prints"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Foot-Touch Detection</h4>
+                                <span class="text-sm text-slate-500">Automated deduction based on posture physics</span>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-4 bg-white border border-slate-200 p-4 rounded-lg shadow-sm">
+                            <div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-600">
+                                <i class="fas fa-infinity"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Figure-8 Trajectory</h4>
+                                <span class="text-sm text-slate-500">Virtual overhead calibration ensures perfect pathing</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Service 3: Software -->
+            <div class="flex flex-col lg:flex-row items-center gap-16 service-block">
+                <div class="w-full lg:w-1/2 relative h-[380px] bg-slate-100 rounded-xl border border-slate-200 shadow-md flex items-center justify-center overflow-hidden">
+                     <div class="absolute top-4 left-4 bg-white px-3 py-1.5 text-xs font-semibold rounded shadow-sm border border-slate-200 text-slate-700 z-20">
+                        Command Dashboard
+                    </div>
+                    
+                    <!-- Real Image Placeholder -->
+                    <!-- TODO: Add your real Dashboard Software image URL here -->
+                    <img src="assests/images/ui.png" alt="Centralized Command Software UI" class="absolute inset-0 w-full h-full object-cover z-10">
+                </div>
+
+                <div class="w-full lg:w-1/2">
+                    <h2 class="text-3xl font-bold mb-4 text-slate-900 tracking-tight">Centralized Command Software</h2>
+                    <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                        The core of the operation. A complete software ecosystem to monitor live tests, securely authenticate candidates, and compute verifiable pass/fail scores instantly.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-white border border-slate-200 px-4 py-2 rounded font-medium text-sm text-slate-700 shadow-sm"><i class="fas fa-fingerprint text-slate-400 mr-2"></i>Biometrics</span>
+                        <span class="bg-white border border-slate-200 px-4 py-2 rounded font-medium text-sm text-slate-700 shadow-sm"><i class="fas fa-video text-slate-400 mr-2"></i>Video Sync</span>
+                        <span class="bg-white border border-slate-200 px-4 py-2 rounded font-medium text-sm text-slate-700 shadow-sm"><i class="fas fa-file-pdf text-slate-400 mr-2"></i>Auto-Reports</span>
+                        <span class="bg-white border border-slate-200 px-4 py-2 rounded font-medium text-sm text-slate-700 shadow-sm"><i class="fas fa-database text-slate-400 mr-2"></i>Secure Database</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-24 bg-white border-t border-slate-200 text-center">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Upgrade Your Testing Infrastructure</h2>
+            <p class="text-slate-600 mb-8 text-lg">Bring absolute transparency, rapid processing, and zero bias to your RTO testing grounds with our automated architecture.</p>
+           <a href="contact.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-sm inline-flex items-center gap-2">
+                Consult with our Engineers <i class="fas fa-arrow-right text-sm"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 py-12">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                 <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="80" height="80" rx="16" fill="#1e293b"/>
+                    <path d="M30 70 L50 30 L70 70" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="font-bold text-white tracking-wide">Bharat Automations</span>
+            </div>
+            <p class="text-slate-400 text-sm">© 2026 Bharat Automations. Standardizing Road Safety.</p>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm', 'bg-white/90');
+                nav.classList.remove('bg-white/80', 'py-4');
+                nav.classList.add('py-3');
+            } else {
+                nav.classList.remove('shadow-sm', 'bg-white/90');
+                nav.classList.add('bg-white/80', 'py-4');
+                nav.classList.remove('py-3');
+            }
+        });
+
+        gsap.from(".hero-fade", { y: 20, opacity: 0, duration: 0.8, ease: "power2.out" });
+
+        const serviceBlocks = document.querySelectorAll('.service-block');
+        serviceBlocks.forEach((block, index) => {
+            const visual = block.children[0];
+            const text = block.children[1];
+            
+            const visualX = index % 2 === 0 ? -30 : 30;
+            const textX = index % 2 === 0 ? 30 : -30;
+
+            gsap.from(visual, {
+                scrollTrigger: { trigger: block, start: "top 80%" },
+                x: visualX, opacity: 0, duration: 0.8, ease: "power2.out"
+            });
+
+            gsap.from(text, {
+                scrollTrigger: { trigger: block, start: "top 80%" },
+                x: textX, opacity: 0, duration: 0.8, delay: 0.2, ease: "power2.out"
+            });
+        });
+        
+     // Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                // Toggle between hamburger icon and X icon
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+        }
+
+        
+    </script>
+</body>
+</html>

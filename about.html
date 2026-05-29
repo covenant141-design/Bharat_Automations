@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Bharat Automations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+        .clean-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-200 selection:text-blue-900 bg-pattern">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 px-6 md:px-12 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="home.html" class="flex items-center gap-3">
+                <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="80" height="80" rx="16" fill="#0f172a"/>
+                    <path d="M30 70 L50 30 L70 70" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="50" cy="55" r="8" fill="#2563eb" />
+                </svg>
+                <span class="text-xl font-bold tracking-tight text-slate-900">Bharat Automations</span>
+            </a>
+            
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+                <a href="home.html" class="hover:text-blue-600 transition-colors">Home</a>
+                <a href="services.html" class="hover:text-blue-600 transition-colors">Our Services</a>
+                <a href="techno.html" class="hover:text-blue-600 transition-colors">Technology</a>
+                <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
+                <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a> 
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-slate-600 hover:text-blue-600 focus:outline-none ml-auto">
+    <i class="fas fa-bars text-2xl"></i>
+</button>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+<div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-lg py-4 px-6 flex flex-col gap-4 text-sm font-medium text-slate-600">
+    <a href="index.html" class="hover:text-blue-600 transition-colors">Home</a>
+    <a href="services.html" class="hover:text-blue-600 transition-colors">Our Services</a>
+    <a href="techno.html" class="hover:text-blue-600 transition-colors">Technology</a>
+    <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
+    <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a>
+</div>
+    </nav>
+
+    <!-- Header -->
+    <header class="relative pt-32 pb-16 px-6 md:px-12 flex flex-col items-center text-center overflow-hidden min-h-[40vh] justify-center bg-white border-b border-slate-200">
+        <div class="relative z-10 max-w-4xl mx-auto hero-fade">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-100 border border-slate-200 text-slate-600 text-xs font-semibold mb-6">
+                <i class="fas fa-flag text-slate-400"></i> Built for India
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6 text-slate-900 tracking-tight">
+                Standardizing Road Safety
+            </h1>
+            <p class="text-lg text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed">
+                Founded in Jaipur, we engineer precise, transparent, and fully automated driving test track systems tailored for Indian infrastructure.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-20 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <!-- Our Story Section -->
+            <div class="flex flex-col lg:flex-row items-center gap-16 mb-24 content-block">
+                <div class="w-full lg:w-1/2 relative h-[400px] clean-card overflow-hidden bg-slate-100 p-2">
+                    <div class="absolute top-4 left-4 bg-white px-3 py-1 text-[10px] font-bold tracking-wider rounded border border-slate-200 text-slate-500 z-20">
+                        EST. 2023
+                    </div>
+                    
+                    <!-- Real Image Placeholder -->
+                    <!-- TODO: Add your founding team or office image URL here -->
+                    <img src="assests/images/groupP.png" alt="Bharat Automations Founding Team" class="absolute inset-0 w-full h-full object-cover z-10">
+                   
+                </div>
+                
+                <div class="w-full lg:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6 text-slate-900 tracking-tight">Our Genesis</h2>
+                    <p class="text-slate-600 mb-6 text-lg leading-relaxed">
+                        Established in <strong>2023</strong> in Jaipur, Rajasthan, Bharat Automations was founded with a singular vision: to remove human subjectivity from the driver evaluation process. 
+                    </p>
+                    <p class="text-slate-600 mb-6 text-lg leading-relaxed">
+                        We recognized that manual RTO testing often leads to bottlenecks, grievances, and compromised road safety. By leveraging cutting-edge computer vision and military-grade sensor networks, we developed an automated system capable of evaluating complex driving maneuvers with absolute mathematical precision.
+                    </p>
+                    <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg">
+                        <p class="text-sm text-slate-700 font-medium italic">
+                            "Our mission is to deploy indigenous technology that ensures only competent drivers receive licenses, ultimately saving lives on Indian roads."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Values -->
+            <div class="text-center mb-12 content-block">
+                <h2 class="text-3xl font-bold mb-4 text-slate-900 tracking-tight">Why Choose Us</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto text-lg">We build systems designed to operate flawlessly under the unique constraints and demands of Indian RTOs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 content-block">
+                <!-- Value 1 -->
+                <div class="clean-card p-8 hover:border-blue-300 transition-colors duration-300">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mb-6 border border-blue-100">
+                        <i class="fas fa-scale-balanced text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">Zero Bias</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Algorithms do not have bad days. Our systems evaluate every candidate based strictly on mathematical trajectory and sensor data, ensuring 100% transparency and fairness.
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div class="clean-card p-8 hover:border-blue-300 transition-colors duration-300">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mb-6 border border-blue-100">
+                        <i class="fas fa-tachometer-alt text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">High Throughput</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Designed for high-density RTOs. Our automated workflow drastically reduces testing time per candidate, clearing backlogs and streamlining administrative processes.
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div class="clean-card p-8 hover:border-blue-300 transition-colors duration-300">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mb-6 border border-blue-100">
+                        <i class="fas fa-shield text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">Rugged Deployment</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Hardware built to survive. From scorching 50°C summers to heavy monsoons, our IP67-rated track infrastructure guarantees maximum uptime.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                 <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="80" height="80" rx="16" fill="#1e293b"/>
+                    <path d="M30 70 L50 30 L70 70" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="font-bold text-white tracking-wide">Bharat Automations</span>
+            </div>
+            <p class="text-slate-400 text-sm">© 2026 Bharat Automations. Standardizing Road Safety.</p>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm', 'bg-white/90');
+                nav.classList.remove('bg-white/80', 'py-4');
+                nav.classList.add('py-3');
+            } else {
+                nav.classList.remove('shadow-sm', 'bg-white/90');
+                nav.classList.add('bg-white/80', 'py-4');
+                nav.classList.remove('py-3');
+            }
+        });
+
+        // Animations
+        gsap.from(".hero-fade", { y: 20, opacity: 0, duration: 0.8, ease: "power2.out" });
+
+        const contentBlocks = document.querySelectorAll('.content-block');
+        contentBlocks.forEach((block) => {
+            gsap.from(block, {
+                scrollTrigger: { trigger: block, start: "top 85%" },
+                y: 30, opacity: 0, duration: 0.8, ease: "power2.out"
+            });
+        });
+     // Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                // Toggle between hamburger icon and X icon
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>

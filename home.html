@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Track Automations | RTO Driving Test Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light slate */
+            color: #0f172a; /* Dark slate text */
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Clean dot pattern background instead of abstract colors */
+        .bg-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .clean-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-radius: 1rem;
+        }
+
+        /* Technical drawing animation - no glows, just clean lines */
+        .track-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawTrack 4s cubic-bezier(0.4, 0, 0.2, 1) forwards infinite;
+        }
+
+        @keyframes drawTrack {
+            to { stroke-dashoffset: 0; }
+        }
+        
+        #interactive-track-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .sensor-node {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: #ffffff;
+            border: 3px solid #2563eb; /* Corporate Blue */
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+        
+        .sensor-node:hover {
+            transform: scale(1.3);
+            background-color: #2563eb;
+        }
+
+        .sensor-tooltip {
+            position: absolute;
+            background: #1e293b;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+            z-index: 20;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Blueprint style vehicle */
+        .vehicle {
+            position: absolute;
+            width: 20px;
+            height: 36px;
+            background: #2563eb;
+            border-radius: 4px;
+            top: 50%;
+            left: 10%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            border: 2px solid #1e3a8a;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-200 selection:text-blue-900 bg-pattern">
+
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 px-6 md:px-12 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <!-- Clean Logo -->
+                <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="80" height="80" rx="16" fill="#0f172a"/>
+                    <path d="M30 70 L50 30 L70 70" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="50" cy="55" r="8" fill="#2563eb" />
+                </svg>
+                
+                <a href="home.html" class="flex items-center gap-3 cursor-pointer">
+                   <!-- Your SVG Logo here -->
+                <span class="text-xl font-bold tracking-tight text-slate-900">Bharat Automations</span>
+              </a>
+                
+            </div>
+            
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+                <a href="home.html" class="hover:text-blue-600 transition-colors">Home</a>
+                <a href="services.html" class="hover:text-blue-600 transition-colors">Our Services</a>
+                <a href="techno.html" class="hover:text-blue-600 transition-colors">Technology</a>
+                <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
+                <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a>           
+                 </div>
+                  <button id="mobile-menu-btn" class="md:hidden text-slate-600 hover:text-blue-600 focus:outline-none ml-auto">
+    <i class="fas fa-bars text-2xl"></i>
+</button>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+<div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-lg py-4 px-6 flex flex-col gap-4 text-sm font-medium text-slate-600">
+    <a href="index.html" class="hover:text-blue-600 transition-colors">Home</a>
+    <a href="services.html" class="hover:text-blue-600 transition-colors">Our Services</a>
+    <a href="techno.html" class="hover:text-blue-600 transition-colors">Technology</a>
+    <a href="about.html" class="hover:text-blue-600 transition-colors">About Us</a>
+    <a href="contact.html" class="hover:text-blue-600 transition-colors">Contact</a>
+</div>
+    </nav>
+
+    <section class="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            <div class="hero-content">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-semibold mb-6">
+                    <div class="w-2 h-2 rounded-full bg-blue-500"></div> Enterprise RTO Solutions
+                </div>
+                <div class="text-center md:text-left mb-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight uppercase">RTO Automations</h2>
+                    <h3 class="text-xl md:text-2xl font-semibold text-blue-600 tracking-wide mt-1">Built for India</h3>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-slate-900 tracking-tight">
+                    Zero Bias.<br>
+                    Absolute Precision.
+                </h1>
+                <p class="text-lg text-slate-600 mb-8 max-w-xl font-normal leading-relaxed">
+                    Transforming driving tests with un-manned, AI-driven track monitoring. Complete transparency and real-time evaluation for modern road safety infrastructure.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="techno.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center gap-2">
+                        Explore Technology <i class="fas fa-arrow-right text-sm"></i>
+                    </a>
+                    <a href="services.html" class="bg-white border border-slate-200 text-slate-700 px-8 py-3 rounded-lg font-semibold hover:bg-slate-50 transition-colors flex items-center gap-2">
+                        <i class="fas fa-cogs text-slate-400"></i> Our Services
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual clean-card p-6 flex flex-col justify-between w-full relative">
+                <!-- Real Image Placeholder -->
+                <div class="relative w-full h-[350px] bg-slate-100 rounded-lg border border-slate-200 overflow-hidden flex items-center justify-center">
+                    <!-- TODO: Add your real hero image URL here -->
+                    <img src="assests/images/top-view.png" alt="Track Automation Hero Image" class="absolute inset-0 w-full h-full object-cover">
+                    
+                    
+                     <div class="absolute top-3 left-3 bg-white border border-slate-200 px-2 py-1 rounded text-[10px] font-bold text-slate-600 flex items-center gap-2 shadow-sm z-20">
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> SYSTEM ACTIVE
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-24 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">The Anatomy of a Smart Track</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto">Hover over the interactive points to see how our embedded synchronization and video analytic algorithms monitor every inch of the test track.</p>
+        </div>
+
+        <div class="px-6 md:px-12">
+            <div id="interactive-track-container" class="bg-slate-100 flex items-center justify-center">
+                
+                <!-- Real Image Placeholder for Interactive Track -->
+                <!-- TODO: Add your real track top-down image URL here -->
+                <img src="assests/images/drone-view.png" alt="Top-down view of RTO track" class="absolute inset-0 w-full h-full object-cover">
+
+                <!-- Interactive Sensor Nodes (Keep these overlaying the image) -->
+                <div class="sensor-node" style="top: 52%; left: 26%;" data-tooltip="Reverse Parking"></div>
+                <div class="sensor-node" style="top: 36%; left: 34%;" data-tooltip="8 Track"></div>
+                <div class="sensor-node" style="top: 81%; left: 25%;" data-tooltip="Two Wheeler Track"></div>
+                <div class="sensor-node" style="top: 50%; left: 50%;" data-tooltip="Central Calibration Hub"></div>
+                <div class="sensor-node" style="top: 34%; left: 42%;" data-tooltip="UpGradient"></div>
+                
+                <div class="sensor-tooltip" id="tooltip"></div>
+            </div>
+            
+            <!-- Clean Legend -->
+            <div class="mt-8 flex flex-wrap justify-center gap-8 text-sm text-slate-600 font-medium">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 border-2 border-blue-600 rounded-full"></div> Sensor Node
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg> 
+                    Real-time Sync
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    IP67 Weatherproof
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Visual Component: Clean Report UI -->
+                <div class="order-2 lg:order-1 clean-card p-8">
+                    <div class="flex justify-between items-center mb-8 border-b border-slate-100 pb-4">
+                        <h3 class="font-bold text-lg text-slate-900">Analytic Report</h3>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded text-xs font-bold tracking-wide">PASS</span>
+                    </div>
+                    
+                    <!-- Clean Bar Charts -->
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2 font-medium">
+                                <span class="text-slate-600">Trajectory Accuracy</span>
+                                <span class="text-slate-900">94%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-slate-800 h-2 rounded-full" style="width: 94%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2 font-medium">
+                                <span class="text-slate-600">Speed Control</span>
+                                <span class="text-slate-900">97%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-slate-600 h-2 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2 font-medium">
+                                <span class="text-slate-600">Reverse Parking Discipline</span>
+                                <span class="text-slate-900">88%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-slate-400 h-2 rounded-full" style="width: 76%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clean Timeline Graph -->
+                    <div class="mt-10 h-32 flex items-end justify-between gap-3 border-l border-b border-slate-200 pb-2 pl-2">
+                        <div class="w-full bg-slate-200 hover:bg-slate-300 transition-colors rounded-t-sm" style="height: 40%"></div>
+                        <div class="w-full bg-slate-300 hover:bg-slate-400 transition-colors rounded-t-sm" style="height: 60%"></div>
+                        <div class="w-full bg-slate-400 hover:bg-slate-500 transition-colors rounded-t-sm" style="height: 30%"></div>
+                        <div class="w-full bg-blue-500 hover:bg-blue-600 transition-colors rounded-t-sm" style="height: 80%"></div>
+                        <div class="w-full bg-slate-800 hover:bg-slate-900 transition-colors rounded-t-sm" style="height: 95%"></div>
+                    </div>
+                    <div class="text-center text-[10px] font-semibold uppercase tracking-widest text-slate-400 mt-4">Performance Timeline</div>
+                </div>
+
+                <!-- Text Component -->
+                <div class="order-1 lg:order-2">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 tracking-tight">Data-Driven Analytics.<br>Instant Results.</h2>
+                    <p class="text-slate-600 mb-8 text-lg leading-relaxed">
+                        Move beyond simple pass/fail metrics. Our system computes driving scores in real-time, generating precise analytical reports. We compare candidate paths against calibrated expert data to ensure standardized testing.
+                    </p>
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 bg-slate-100 p-2.5 rounded border border-slate-200 text-slate-700">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Centralized Records</h4>
+                                <p class="text-slate-600 text-sm mt-1 leading-relaxed">Secure, easily searchable database of candidate histories for report generation and transparent grievance handling.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 bg-slate-100 p-2.5 rounded border border-slate-200 text-slate-700">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-lg">Undeniable Transparency</h4>
+                                <p class="text-slate-600 text-sm mt-1 leading-relaxed">Every test generates synchronized video recordings mapped precisely to the virtual top-view track data.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="py-24 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-16 text-center tracking-tight">Creating Safer Roads,<br>One Automated Test at a Time.</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="clean-card p-8 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-slate-100 rounded flex items-center justify-center text-slate-800 mb-6 border border-slate-200">
+                        <i class="fas fa-user-check text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Quality Drivers</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Learners understand techniques professionally, leading to concrete, real-time road safety improvements.</p>
+                </div>
+
+                <div class="clean-card p-8 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-slate-100 rounded flex items-center justify-center text-slate-800 mb-6 border border-slate-200">
+                        <i class="fas fa-tachometer-fast text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Hassle-Free Process</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">A robust, automated system eliminates time-consuming manual evaluations and human interference entirely.</p>
+                </div>
+
+                <div class="clean-card p-8 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-slate-100 rounded flex items-center justify-center text-slate-800 mb-6 border border-slate-200">
+                        <i class="fas fa-chart-bar text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Actionable Feedback</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Detailed data analysis helps applicants explicitly understand where their driving skills require development.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 py-12">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                 <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="80" height="80" rx="16" fill="#1e293b"/>
+                    <path d="M30 70 L50 30 L70 70" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="font-bold text-white tracking-wide">Bharat Automations</span>
+            </div>
+            <p class="text-slate-400 text-sm">© 2026 Bharat Automations. Standardizing Road Safety.</p>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navbar blur effect on scroll (light mode)
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm', 'bg-white/90');
+                nav.classList.remove('bg-white/80', 'py-4');
+                nav.classList.add('py-3');
+            } else {
+                nav.classList.remove('shadow-sm', 'bg-white/90');
+                nav.classList.add('bg-white/80', 'py-4');
+                nav.classList.remove('py-3');
+            }
+        });
+
+        // Clean Hero Animations
+        gsap.from(".hero-content > *", {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power2.out"
+        });
+
+        gsap.from(".hero-visual", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            delay: 0.4,
+            ease: "power2.out"
+        });
+
+        // Interactive Track Logic - Removed SVG animation logic
+        
+        // Clean Tooltip logic remains to work over the image
+        const nodes = document.querySelectorAll('.sensor-node');
+        const tooltip = document.getElementById('tooltip');
+        const container = document.getElementById('interactive-track-container');
+
+        nodes.forEach(node => {
+            node.addEventListener('mouseenter', (e) => {
+                const text = e.target.getAttribute('data-tooltip');
+                tooltip.textContent = text;
+                tooltip.style.opacity = '1';
+                
+                const rect = e.target.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                
+                const top = rect.top - containerRect.top - 45; 
+                const left = rect.left - containerRect.left + (rect.width / 2);
+                
+                tooltip.style.top = `${top}px`;
+                tooltip.style.left = `${left}px`;
+                tooltip.style.transform = `translateX(-50%)`;
+            });
+
+            node.addEventListener('mouseleave', () => {
+                tooltip.style.opacity = '0';
+            });
+        });
+        
+     // Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                // Toggle between hamburger icon and X icon
+                if(mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+        }
+
+        
+    </script>
+</body>
+</html>
